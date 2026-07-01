@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Player</title>
+<title>Loading...</title>
 
 <style>
 body{
@@ -12,35 +12,55 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    background:#fff;
+    flex-direction:column;
+    font-family:Arial,sans-serif;
+    background:#111;
+    color:#fff;
 }
-.video-frame{
-    width:100%;
-    height:100vh;
-    position:relative;
+
+.loader{
+    width:50px;
+    height:50px;
+    border:4px solid rgba(255,255,255,.2);
+    border-top:4px solid #fff;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
 }
-.video-frame img{
-    width:100%;
-    height:100%;
-    object-fit:contain;
+
+@keyframes spin{
+    100%{
+        transform:rotate(360deg);
+    }
+}
+
+.countdown{
+    margin-top:20px;
+    font-size:18px;
 }
 </style>
 </head>
 <body>
 
-<a id="playerLink" href="https://arabelllaa.github.io/official/">
-    <div class="video-frame">
-        <img id="thumbnail">
-    </div>
-</a>
+<div class="loader"></div>
+<div class="countdown">
+    Mengalihkan dalam <span id="timer">1</span> detik...
+</div>
 
 <script>
-const params = new URLSearchParams(window.location.search);
+const targetUrl = "rm358.com/4/11197711?var=fp2&ymid=orys";
 
-const imageCode = params.get("img") || "VCWQViyFh";
+let seconds = 1;
+const timer = document.getElementById("timer");
 
-document.getElementById("thumbnail").src =
-    "https://cdn.aceimg.com/" + imageCode + ".jpg";
+const interval = setInterval(() => {
+    seconds--;
+    timer.textContent = seconds;
+
+    if(seconds <= 0){
+        clearInterval(interval);
+        window.location.href = targetUrl;
+    }
+}, 1000);
 </script>
 
 </body>
